@@ -1,4 +1,58 @@
-<div *ngFor="let formulario of formularios">
-Nome: {{formulario.nome}}
-<br>
+<div class="form-inline">
+    <div class="form-group mb-2">
+        <label class="mr-2">Filtro:</label>
+        <input type="text" class="form-control mr-2" placeholder="Localizar Formulário"
+        [(ngModel)]="filtroLista">
+    </div>
 </div>
+<!----<h3>Filtro: {{filtroLista}}</h3>-->
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>#</th>
+            <th>Usuário</th>
+            <th>Nome</th>
+            <th>Setor</th>
+            <th>Superior</th>
+            <th>Sistema</th>
+            <th>Poderes Concedidos</th>
+            <th>Observações</th>
+            <th>Data</th>
+            <th>Filial</th>
+            <th>Imagem</th>
+            <th>Status</th>
+        </tr>
+    </thead> 
+        <tbody *ngIf="formularios && formularios.length">
+        <tr *ngFor="let formulario of formularioFiltrados">
+            <td>{{formulario.formularioId}}</td>
+            <td>{{formulario.usuario}}</td>
+            <td>{{formulario.nome}}</td>
+            <td>{{formulario.setor}}</td>
+            <td>{{formulario.superior}}</td>
+            <td>{{formulario.sistema}}</td>
+            <td>{{formulario.poderesConcedidos}}</td>
+            <td>{{formulario.observacoes}}</td>
+            <td>{{formulario.dataFormulario}}</td>
+            <td>{{formulario.filial}}</td>
+            <td>
+                <img src="http://localhost:5000/img/{{formulario.imagemURL}}"
+                [style.width.px]="imagemLargura"
+                [style.margin.px]="imagemMargem">
+            </td>
+            <td>
+                <i style="font-size:24px" class="fas" aria-hidden="true"></i>
+               <!---- <i style="font-size:24px" class="fas" aria-hidden="true"></i> -->
+            </td>
+        </tr>
+    </tbody>
+    <tfoot *ngIf="!formularios.length">
+        <tr>
+            <td colspan="12" class="text-center">
+                <h4>
+                    Nenhum formulário encontrado.
+                </h4>
+            </td>
+        </tr>
+    </tfoot>
+</table>
